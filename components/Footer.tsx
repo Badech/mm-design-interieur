@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About */}
           <div>
-            <h3 className="text-xl font-heading font-bold mb-4">M.M Design d'intérieur</h3>
+            <h3 className="text-xl font-heading font-bold mb-4">M.M Design d&apos;intérieur</h3>
             <p className="text-secondary-gray text-sm leading-relaxed">
               {t.footer.description}
             </p>
@@ -73,7 +73,7 @@ export default function Footer() {
 
         <div className="border-t border-primary-light mt-8 pt-8 text-center text-sm text-secondary-gray">
           <p>
-            © {currentYear} M.M Design d'intérieur. {t.footer.rights}
+            © {currentYear} M.M Design d&apos;intérieur. {t.footer.rights}
           </p>
         </div>
       </div>

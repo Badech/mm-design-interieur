@@ -57,7 +57,7 @@ export default function TestimonialsPage() {
 
                 {/* Testimonial Text */}
                 <p className="text-secondary-gray mb-6 leading-relaxed italic">
-                  "{testimonial.text}"
+                  &quot;{testimonial.text}&quot;
                 </p>
 
                 {/* Project */}

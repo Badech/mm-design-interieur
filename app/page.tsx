@@ -222,7 +222,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="text-secondary-gray mb-6 leading-relaxed italic">
-                  "{testimonial.text}"
+                  &quot;{testimonial.text}&quot;
                 </p>
                 <div>
                   <p className="font-semibold text-primary">{testimonial.name}</p>

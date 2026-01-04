@@ -96,7 +96,7 @@ export default function AboutPage() {
               <div className="text-5xl mb-4">✨</div>
               <h3 className="text-xl font-heading font-bold text-primary mb-3">Excellence</h3>
               <p className="text-secondary-gray">
-                Nous visons l'excellence dans chaque détail de nos réalisations.
+                Nous visons l&apos;excellence dans chaque détail de nos réalisations.
               </p>
             </div>
             <div className="text-center p-8 bg-secondary rounded-lg">
