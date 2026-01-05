@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect } from "react";
+import PhotoSwipeLightbox from "photoswipe/lightbox";
+import "photoswipe/style.css";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { buildWhatsAppMessage, getWhatsAppUrl } from "@/lib/config";
 

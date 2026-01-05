@@ -1,8 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import PhotoSwipeLightbox from "photoswipe/lightbox";
+import "photoswipe/style.css";
 import Link from "next/link";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 
@@ -11,6 +15,17 @@ type ProjectCategory = "all" | "villa" | "apartment" | "office" | "restaurant";
 export default function PortfolioPage() {
   const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>("all");
+
+  // Init PhotoSwipe lightbox for galleries
+  useEffect(() => {
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: "#portfolio-galleries",
+      children: "a[data-pswp-src]",
+      pswpModule: () => import("photoswipe"),
+    });
+    lightbox.init();
+    return () => lightbox.destroy();
+  }, []);
 
   const projects = [
     {
@@ -109,12 +124,12 @@ export default function PortfolioPage() {
       {/* Filters */}
       <section className="py-12 bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
             {filters.map((filter) => (
               <button
                 key={filter.key}
                 onClick={() => setActiveFilter(filter.key)}
-                className={`px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
+                className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 min-h-[44px] ${
                   activeFilter === filter.key
                     ? "bg-accent text-primary"
                     : "bg-white text-primary hover:bg-accent/20"
@@ -130,20 +145,54 @@ export default function PortfolioPage() {
       {/* Projects Grid */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div id="portfolio-galleries" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredProjects.map((project) => (
               <div
                 key={project.id}
                 className="group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
               >
                 <div className="relative h-64 overflow-hidden">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
+                  {/* Mobile: swipeable gallery; Desktop: single image */}
+                  <div className="block lg:hidden">
+                    <Swiper spaceBetween={8} slidesPerView={1}>
+                      {[project.beforeImage, project.afterImage, project.image].map((src, idx) => (
+                        <SwiperSlide key={idx}>
+                          <a
+                            href={src}
+                            data-pswp-src={src}
+                            data-pswp-width="1600"
+                            data-pswp-height="1200"
+                            aria-label={`${project.title} - image ${idx + 1}`}
+                          >
+                            <Image
+                              src={src}
+                              alt={`${project.title} ${idx + 1}`}
+                              fill
+                              className="object-cover"
+                              sizes="100vw"
+                            />
+                          </a>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
+                  <div className="hidden lg:block">
+                    <a
+                      href={project.image}
+                      data-pswp-src={project.image}
+                      data-pswp-width="1600"
+                      data-pswp-height="1200"
+                      aria-label={`${project.title}`}
+                    >
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        sizes="(max-width: 1024px) 50vw, 33vw"
+                      />
+                    </a>
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-0 left-0 right-0 p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span className="text-accent text-sm font-medium">
