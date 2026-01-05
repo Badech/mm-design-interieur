@@ -11,7 +11,17 @@ export default function Header() {
   const { t, language, setLanguage } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const isRTL = language === "ar";
+
+  const closeMenu = () => {
+    if (!isMobileMenuOpen) return;
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsClosing(false);
+      setIsMobileMenuOpen(false);
+    }, 200);
+  };
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -20,16 +30,20 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    if (!isMobileMenuOpen) return;
-    const originalStyle = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsMobileMenuOpen(false);
+      if (e.key === "Escape") closeMenu();
     };
     window.addEventListener("keydown", onKeyDown);
+
+    // Lock background scroll while mobile menu is open
+    const originalOverflow = document.body.style.overflow;
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    }
+
     return () => {
-      document.body.style.overflow = originalStyle;
       window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = originalOverflow;
     };
   }, [isMobileMenuOpen]);
 
@@ -116,7 +130,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => (isMobileMenuOpen ? closeMenu() : setIsMobileMenuOpen(true))}
             className="lg:hidden p-2 text-primary"
             aria-label="Toggle menu"
           >
@@ -140,80 +154,67 @@ export default function Header() {
 
         {/* Mobile Menu (Bottom Sheet) */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden fixed inset-0 z-[60]" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
-            {/* Overlay */}
-            <button
-              aria-label="Close menu"
-              className="fixed inset-0 bg-black/40 backdrop-blur-[1px]"
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
-            {/* Sheet */}
-            <div className="fixed inset-x-0 bottom-0 max-h-[85vh] rounded-t-2xl bg-white shadow-2xl animate-slide-up focus:outline-none flex flex-col">
-              {/* Handle + Close */}
-              <div className="flex items-center justify-between px-5 pt-4 pb-2">
-                <span className="mx-auto h-1.5 w-12 rounded-full bg-secondary" aria-hidden="true" />
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  aria-label="Fermer le menu"
-                  className="absolute right-3 top-3 w-11 h-11 grid place-items-center rounded-full bg-secondary hover:bg-secondary/80 active:scale-95 transition transform duration-150"
-                >
-                  <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
+          <div className="lg:hidden fixed inset-0 z-[60] bg-transparent" role="dialog" aria-modal="true" aria-label="Mobile navigation menu" onClick={closeMenu}>
+            <div className="absolute inset-0 bg-black/40 opacity-100 transition-opacity duration-200" aria-hidden="true" />
+            {/* Backdrop handles outside click; no extra button */}
 
-              {/* Content */}
-              <div className="px-5 pb-6 overflow-y-auto flex-1">
-                {/* Nav links */}
-                <nav className="flex flex-col" aria-label="Primary">
+            {/* Simple Sidebar Panel */}
+            <div
+              className={`fixed top-20 ${isRTL ? (isClosing ? "left-0 animate-mobile-menu-exit-rtl" : "left-0 animate-mobile-menu-rtl") : (isClosing ? "right-0 animate-mobile-menu-exit-ltr" : "right-0 animate-mobile-menu-ltr")} w-screen max-w-none bg-white shadow-xl ring-1 ring-black/5 focus:outline-none flex flex-col` }
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button (X) */}
+              <button
+                onClick={closeMenu}
+                aria-label="Close menu"
+                className={`absolute top-2 ${isRTL ? 'left-2' : 'right-2'} p-2 rounded-full hover:bg-secondary/60 active:bg-secondary/80 transition`}
+              >
+                <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              {/* Nav links */}
+              <nav className={`px-6 py-8 ${isRTL ? "text-right" : "text-left"}`} aria-label="Primary">
+                <div className="flex flex-col gap-3">
                   {navLinks.map((link) => {
                     const isActive = pathname === link.href;
-                    const sideBorder = isRTL ? "border-r-2 pr-3" : "border-l-2 pl-3";
-                    const sideBorderColor = isActive ? "border-accent" : "border-transparent";
                     return (
                       <Link
                         key={link.href}
                         href={link.href}
                         onClick={() => setIsMobileMenuOpen(false)}
                         aria-current={isActive ? "page" : undefined}
-                        className={`group flex items-center gap-3 py-4 text-lg leading-7 ${
-                          isActive ? "text-accent" : "text-primary"
-                        } ${sideBorder} ${sideBorderColor} focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/20 transition-colors hover:bg-secondary/40 rounded-lg px-3`}
+                        className={`block w-full px-4 py-4 min-h-[48px] text-lg font-medium transition-colors rounded-lg ${
+                          isActive ? "text-accent bg-secondary/50" : "text-primary hover:bg-secondary/30 active:bg-secondary/40"
+                        }`}
                       >
-                        <span className="flex-1 font-semibold tracking-wide">{link.label}</span>
-                        <svg className="w-4 h-4 text-secondary-gray opacity-80 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                          {isRTL ? <path d="M15 18l-6-6 6-6" /> : <path d="M9 18l6-6-6-6" />}
-                        </svg>
+                        <span className="truncate inline-block">{link.label}</span>
                       </Link>
                     );
                   })}
-                </nav>
+                </div>
 
                 {/* Language selector */}
-                <div className="mt-5">
-                  <div className="rounded-xl border border-secondary bg-secondary/40 p-2">
-                    <div className="flex items-center justify-center gap-3" role="group" aria-label="Language selector">
-                      {languages.map((lang) => (
-                        <button
-                          key={lang.code}
-                          onClick={() => setLanguage(lang.code)}
-                          className={`w-11 h-11 flex items-center justify-center rounded-full transition-all duration-200 ${
-                            language === lang.code
-                              ? "bg-white shadow ring-2 ring-accent/50"
-                              : "hover:bg-white/70"
-                          }`}
-                          title={lang.label}
-                          aria-pressed={language === lang.code}
-                          aria-label={`Switch to ${lang.label}`}
-                        >
-                          <Image src={lang.src} alt={lang.alt} width={22} height={22} className="w-5 h-5 rounded-full object-cover" />
-                        </button>
-                      ))}
-                    </div>
+                <div className="mt-6">
+                  <div className="flex items-center justify-center gap-2" role="group" aria-label="Language selector">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => setLanguage(lang.code)}
+                        className={`w-10 h-10 flex items-center justify-center rounded-full transition-all duration-150 ${
+                          language === lang.code ? "bg-secondary" : "hover:bg-secondary/60"
+                        }`}
+                        title={lang.label}
+                        aria-pressed={language === lang.code}
+                        aria-label={`Switch to ${lang.label}`}
+                      >
+                        <Image src={lang.src} alt={lang.alt} width={20} height={20} className="w-5 h-5 rounded-full object-cover" />
+                      </button>
+                    ))}
                   </div>
                 </div>
-              </div>
+              </nav>
             </div>
           </div>
         )}

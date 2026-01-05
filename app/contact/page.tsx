@@ -20,12 +20,12 @@ export default function ContactPage() {
     setIsSubmitting(true);
 
     const message = `Bonjour, je m'appelle ${formData.name}.\n\nEmail: ${formData.email}\nTéléphone: ${formData.phone}\n\nMessage: ${formData.message}`;
-    const whatsappUrl = getWhatsAppUrl(buildWhatsAppMessage(message, { page: "Contact", language: "fr" }));
+    const whatsappUrl = getWhatsAppUrl(
+      buildWhatsAppMessage(message, { page: "Contact", language: "fr" })
+    );
 
-    // Redirect to WhatsApp
     window.open(whatsappUrl, "_blank");
 
-    // Reset form after a delay
     setTimeout(() => {
       setFormData({ name: "", email: "", phone: "", message: "" });
       setIsSubmitting(false);
@@ -68,13 +68,17 @@ export default function ContactPage() {
       <section className="py-12 bg-[#f0fff5]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <a
-            href={getWhatsAppUrl(buildWhatsAppMessage(t.whatsapp.message, { page: "Contact", language: "fr" }))}
+            href={getWhatsAppUrl(
+              buildWhatsAppMessage(t.whatsapp.message, { page: "Contact", language: "fr" })
+            )}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-3 bg-[#25D366] text-white px-6 py-4 rounded-xl shadow-lg hover:bg-[#20BA5A] transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-[#25D366]/40"
             aria-label="Contactez-nous sur WhatsApp"
           >
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.052 3.134 4.974 4.384.695.3 1.237.48 1.66.614.697.222 1.333.191 1.836.116.56-.083 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z"/></svg>
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.52 3.48A11.963 11.963 0 0012 0C5.372 0 0 5.372 0 12c0 2.115.55 4.11 1.515 5.838L0 24l6.342-1.5A11.96 11.96 0 0012 24c6.628 0 12-5.372 12-12 0-3.197-1.248-6.208-3.48-8.52zM12 22.001a9.96 9.96 0 01-5.083-1.394l-.364-.217-3.764.89.802-3.846-.237-.373A9.96 9.96 0 012.001 12c0-5.514 4.486-9.999 9.999-9.999 2.673 0 5.185 1.04 7.071 2.928A9.955 9.955 0 0122 12c0 5.513-4.486 10.001-10 10.001zm5.3-7.987c-.29-.145-1.72-.848-1.985-.944-.266-.097-.459-.145-.652.147-.193.291-.752.943-.922 1.136-.17.193-.341.212-.63.071-.29-.145-1.217-.45-2.322-1.431-.859-.764-1.44-1.708-1.608-1.996-.167-.289-.017-.444.127-.588.131-.13.29-.33.434-.494.144-.165.191-.283.288-.475.097-.193.049-.355-.024-.498-.072-.145-.65-1.545-.891-2.116-.236-.556-.474-.477-.651-.486-.168-.008-.361-.01-.555-.01-.193 0-.506.072-.771.355-.265.281-1.011.988-1.011 2.41 0 1.422 1.036 2.796 1.179 2.988.145.193 2.04 3.113 4.938 4.217.69.299 1.228.477 1.648.611.692.22 1.323.189 1.823.114.557-.083 1.72-.703 1.963-1.38.243-.677.243-1.257.169-1.38-.072-.124-.265-.193-.556-.337z" />
+            </svg>
             <span className="font-semibold">{t.home.hero.cta1} via WhatsApp</span>
           </a>
         </div>
@@ -91,10 +95,7 @@ export default function ContactPage() {
               </h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-primary mb-2"
-                  >
+                  <label htmlFor="name" className="block text-sm font-medium text-primary mb-2">
                     {t.contact.form.name}
                   </label>
                   <input
@@ -110,10 +111,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-primary mb-2"
-                  >
+                  <label htmlFor="email" className="block text-sm font-medium text-primary mb-2">
                     {t.contact.form.email}
                   </label>
                   <input
@@ -129,10 +127,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-primary mb-2"
-                  >
+                  <label htmlFor="phone" className="block text-sm font-medium text-primary mb-2">
                     {t.contact.form.phone}
                   </label>
                   <input
@@ -148,10 +143,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium text-primary mb-2"
-                  >
+                  <label htmlFor="message" className="block text-sm font-medium text-primary mb-2">
                     {t.contact.form.message}
                   </label>
                   <textarea

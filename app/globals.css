@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mobile menu slide-in animations */
+@keyframes mobileMenuSlideInLTR {
+  from { transform: translateX(100%); opacity: 0.9; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes mobileMenuSlideInRTL {
+  from { transform: translateX(-100%); opacity: 0.9; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.animate-mobile-menu-ltr { animation: mobileMenuSlideInLTR 220ms ease-out both; }
+.animate-mobile-menu-rtl { animation: mobileMenuSlideInRTL 220ms ease-out both; }
+
+/* Exit animations */
+@keyframes mobileMenuSlideOutLTR {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}
+@keyframes mobileMenuSlideOutRTL {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(-100%); opacity: 0; }
+}
+.animate-mobile-menu-exit-ltr { animation: mobileMenuSlideOutLTR 200ms ease-in forwards; }
+.animate-mobile-menu-exit-rtl { animation: mobileMenuSlideOutRTL 200ms ease-in forwards; }
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
 
 :root {
