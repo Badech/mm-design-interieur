@@ -204,6 +204,22 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* CTA after Featured Projects */}
+      <section className="py-16 bg-primary text-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl sm:text-4xl font-heading font-bold mb-4">{t.services.cta.title}</h2>
+          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">{t.services.cta.subtitle}</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/contact" className="bg-accent text-primary px-8 py-4 rounded-lg font-semibold hover:bg-accent-light transition-all duration-300 hover:scale-105">
+              {t.home.hero.cta1}
+            </Link>
+            <a href={getWhatsAppUrl(buildWhatsAppMessage(t.whatsapp.message, { page: "Home", language: "fr" }))} target="_blank" rel="noopener noreferrer" className="bg-[#25D366] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#20BA5A] transition-all duration-300 hover:scale-105">
+              WhatsApp immédiat
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Preview Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

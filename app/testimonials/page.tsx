@@ -40,7 +40,7 @@ export default function TestimonialsPage() {
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
-                className="bg-secondary p-6 sm:p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-secondary"
+                className="bg-secondary p-6 sm:p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-secondary/60"
               >
                 {/* Rating and quote icon */}
                 <div className="flex items-center mb-4 justify-between">

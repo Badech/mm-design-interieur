@@ -148,7 +148,7 @@ export default function Header() {
               onClick={() => setIsMobileMenuOpen(false)}
             />
             {/* Sheet */}
-            <div className="fixed inset-x-0 bottom-0 max-h-[85vh] rounded-t-2xl bg-white shadow-2xl animate-slide-up focus:outline-none flex flex-col">
+            <div className="fixed inset-0 bg-white shadow-2xl animate-slide-up focus:outline-none flex flex-col">
               {/* Handle + Close */}
               <div className="flex items-center justify-between px-5 pt-4 pb-2">
                 <span className="mx-auto h-1.5 w-12 rounded-full bg-secondary" aria-hidden="true" />
@@ -164,9 +164,9 @@ export default function Header() {
               </div>
 
               {/* Content */}
-              <div className="px-5 pb-6 overflow-y-auto flex-1">
+              <div className="px-5 pb-24 pt-2 overflow-y-auto flex-1">
                 {/* Nav links */}
-                <nav className="flex flex-col" aria-label="Primary">
+                <nav className="flex flex-col divide-y divide-secondary/60" aria-label="Primary">
                   {navLinks.map((link) => {
                     const isActive = pathname === link.href;
                     const sideBorder = isRTL ? "border-r-2 pr-3" : "border-l-2 pl-3";
@@ -177,7 +177,7 @@ export default function Header() {
                         href={link.href}
                         onClick={() => setIsMobileMenuOpen(false)}
                         aria-current={isActive ? "page" : undefined}
-                        className={`group flex items-center gap-3 py-4 text-lg leading-7 ${
+                        className={`group flex items-center gap-3 py-5 text-xl leading-8 ${
                           isActive ? "text-accent" : "text-primary"
                         } ${sideBorder} ${sideBorderColor} focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/20 transition-colors hover:bg-secondary/40 rounded-lg px-3`}
                       >
@@ -191,7 +191,7 @@ export default function Header() {
                 </nav>
 
                 {/* Language selector */}
-                <div className="mt-5">
+                <div className="mt-6 border-t border-secondary pt-4">
                   <div className="rounded-xl border border-secondary bg-secondary/40 p-2">
                     <div className="flex items-center justify-center gap-3" role="group" aria-label="Language selector">
                       {languages.map((lang) => (
