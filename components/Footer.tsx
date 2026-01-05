@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isRTL = language === "ar";
 
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-primary text-white mt-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className={`container mx-auto px-4 sm:px-6 lg:px-8 py-12 ${isRTL ? 'rtl' : 'ltr'}`}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About */}
           <div>
@@ -58,7 +59,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-secondary-gray">
               <li>{t.contact.info.address}</li>
               <li>
-                <a href={`tel:${t.contact.info.phone}`} className="hover:text-accent transition-colors">
+                <a href={`tel:${t.contact.info.phone}`} className="hover:text-accent transition-colors" dir="ltr">
                   {t.contact.info.phone}
                 </a>
               </li>
