@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface BeforeAfterSliderProps {
   beforeImage: string;
@@ -14,6 +15,7 @@ export default function BeforeAfterSlider({
   afterImage,
   alt = "Before and After",
 }: BeforeAfterSliderProps) {
+  const { t } = useLanguage();
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -83,10 +85,10 @@ export default function BeforeAfterSlider({
 
       {/* Labels */}
       <div className="absolute top-4 left-4 bg-black/50 text-white px-3 py-1 rounded text-sm font-medium">
-        Avant
+        {t.portfolio.before}
       </div>
       <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded text-sm font-medium">
-        Après
+        {t.portfolio.after}
       </div>
     </div>
   );

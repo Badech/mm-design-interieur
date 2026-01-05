@@ -48,6 +48,20 @@ export interface Translations {
       title: string;
       content: string;
     };
+    values: {
+      excellence: {
+        title: string;
+        description: string;
+      };
+      creativity: {
+        title: string;
+        description: string;
+      };
+      trust: {
+        title: string;
+        description: string;
+      };
+    };
   };
   services: {
     title: string;
@@ -93,6 +107,10 @@ export interface Translations {
     restaurant: string;
     subtitle: string;
     viewProject: string;
+    problem: string;
+    solution: string;
+    before: string;
+    after: string;
     beforeAfter: {
       title: string;
       subtitle: string;
@@ -131,15 +149,47 @@ export interface Translations {
       phone: string;
       email: string;
     };
+    sendMessage: string;
+    contactInfo: string;
+    addressLabel: string;
+    phoneLabel: string;
+    viaWhatsapp: string;
+    locationTitle: string;
   };
+  projects: Array<{
+    id: number;
+    title: string;
+    category: "villa" | "apartment" | "office" | "restaurant";
+    image: string;
+    beforeImage?: string;
+    afterImage?: string;
+    problem: string;
+    solution: string;
+    clientQuote?: string;
+    gallery: string[];
+  }>;
   footer: {
     description: string;
     links: string;
     contact: string;
     rights: string;
   };
+  whyChooseUs: {
+    title: string;
+    subtitle: string;
+    items: Array<{
+      title: string;
+      description: string;
+    }>;
+  };
+  common: {
+    menu: string;
+    language: string;
+  };
   whatsapp: {
     message: string;
+    cta: string;
+    ariaLabel: string;
   };
 }
 
@@ -191,6 +241,20 @@ export const translations: Record<Language, Translations> = {
       expertise: {
         title: "Notre Expertise",
         content: "Spécialisés dans le design d'intérieur au Maroc, nous maîtrisons les subtilités de l'architecture locale et les attentes d'une clientèle exigeante. De Casablanca à Marrakech, en passant par Rabat et Tanger, nous intervenons dans toutes les villes du Maroc pour créer des espaces résidentiels et commerciaux d'exception.",
+      },
+      values: {
+        excellence: {
+          title: "Excellence",
+          description: "Nous visons l'excellence dans chaque détail de nos réalisations.",
+        },
+        creativity: {
+          title: "Créativité",
+          description: "Chaque projet est unique, conçu sur mesure selon votre vision.",
+        },
+        trust: {
+          title: "Confiance",
+          description: "Votre satisfaction et confiance sont au cœur de notre approche.",
+        },
       },
     },
     services: {
@@ -262,6 +326,10 @@ export const translations: Record<Language, Translations> = {
       restaurant: "Restaurants",
       subtitle: "Découvrez nos réalisations d'exception",
       viewProject: "Voir le projet →",
+      problem: "Le Défi",
+      solution: "La Solution",
+      before: "Avant",
+      after: "Après",
       beforeAfter: {
         title: "Avant / Après",
         subtitle: "Découvrez la transformation de nos projets",
@@ -355,15 +423,134 @@ export const translations: Record<Language, Translations> = {
         phone: "+212 XXX XXX XXX",
         email: "contact@mmdesign.ma",
       },
+      sendMessage: "Envoyez-nous un message",
+      contactInfo: "Informations de contact",
+      addressLabel: "Adresse",
+      phoneLabel: "Téléphone",
+      viaWhatsapp: "via WhatsApp",
+      locationTitle: "Notre localisation",
     },
+    projects: [
+      {
+        id: 1,
+        title: "Modern Villa Casablanca",
+        category: "villa",
+        image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
+        problem: "Dark and poorly arranged space not benefiting from natural light.",
+        solution: "Opening spaces, installing bay windows and luminous minimalist design.",
+        clientQuote: "An incredible transformation that changed our way of living.",
+        gallery: [
+          "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1616137466218-f487bc3e4149?w=1600&h=1200&fit=crop",
+        ],
+      },
+      {
+        id: 2,
+        title: "Luxury Apartment Rabat",
+        category: "apartment",
+        image: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        problem: "Lack of storage and dated decoration.",
+        solution: "Integrated custom carpentry and sophisticated color palette.",
+        gallery: [
+          "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1600&h=1200&fit=crop",
+        ],
+      },
+      {
+        id: 3,
+        title: "Executive Office Marrakech",
+        category: "office",
+        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+        problem: "Noisy open space with no privacy.",
+        solution: "Creation of acoustic zones and glass meeting rooms.",
+        clientQuote: "Our employees love coming to work here now.",
+        gallery: [
+          "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1504384308090-c54be3855833?w=1600&h=1200&fit=crop",
+        ],
+      },
+      {
+        id: 4,
+        title: "Restaurant Marrakech",
+        category: "restaurant",
+        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
+        problem: "Cold and impersonal atmosphere.",
+        solution: "Use of warm materials, subdued lighting and local craftsmanship.",
+        gallery: [
+          "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1600&h=1200&fit=crop",
+        ],
+      },
+      {
+        id: 5,
+        title: "Traditional Villa Tangier",
+        category: "villa",
+        image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
+        problem: "Need for modernization while keeping the traditional soul.",
+        solution: "Fusion of traditional zellige style with clean contemporary lines.",
+        gallery: [
+          "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1600&h=1200&fit=crop",
+        ],
+      },
+      {
+        id: 6,
+        title: "Design Studio Casablanca",
+        category: "apartment",
+        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+        problem: "Small space difficult to arrange.",
+        solution: "Modular furniture and mirrors to visually enlarge the space.",
+        gallery: [
+          "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1600&h=1200&fit=crop",
+        ],
+      },
+    ],
     footer: {
       description: "M.M Design d'intérieur - Créateurs d'espaces d'exception au Maroc",
       links: "Liens rapides",
       contact: "Contact",
       rights: "Tous droits réservés",
     },
+    whyChooseUs: {
+      title: "Pourquoi Nous Choisir",
+      subtitle: "L'Excellence au Service de Votre Projet",
+      items: [
+        {
+          title: "Expertise Reconnue",
+          description: "Plus de 10 ans d'expérience dans le design d'intérieur de luxe au Maroc, alliant savoir-faire traditionnel et tendances modernes.",
+        },
+        {
+          title: "Gestion Complète",
+          description: "De la conception à la réalisation, nous gérons chaque étape de votre projet pour une tranquillité d'esprit totale.",
+        },
+        {
+          title: "Design Sur Mesure",
+          description: "Chaque projet est unique. Nous créons des espaces qui reflètent votre personnalité et votre style de vie.",
+        },
+      ],
+    },
+    common: {
+      menu: "Menu",
+      language: "Langue",
+    },
     whatsapp: {
       message: "Bonjour, je souhaite discuter de mon projet de design d'intérieur.",
+      cta: "Consultation WhatsApp gratuite",
+      ariaLabel: "Contactez-nous sur WhatsApp",
     },
   },
   en: {
@@ -413,6 +600,20 @@ export const translations: Record<Language, Translations> = {
       expertise: {
         title: "Our Expertise",
         content: "Specialized in interior design in Morocco, we master the subtleties of local architecture and the expectations of demanding clients. From Casablanca to Marrakech, through Rabat and Tangier, we operate in all cities of Morocco to create exceptional residential and commercial spaces.",
+      },
+      values: {
+        excellence: {
+          title: "Excellence",
+          description: "We aim for excellence in every detail of our achievements.",
+        },
+        creativity: {
+          title: "Creativity",
+          description: "Each project is unique, custom-designed according to your vision.",
+        },
+        trust: {
+          title: "Trust",
+          description: "Your satisfaction and trust are at the heart of our approach.",
+        },
       },
     },
     services: {
@@ -484,6 +685,10 @@ export const translations: Record<Language, Translations> = {
       restaurant: "Restaurants",
       subtitle: "Discover our exceptional achievements",
       viewProject: "View project →",
+      problem: "The Challenge",
+      solution: "The Solution",
+      before: "Before",
+      after: "After",
       beforeAfter: {
         title: "Before / After",
         subtitle: "Discover the transformation of our projects",
@@ -577,6 +782,12 @@ export const translations: Record<Language, Translations> = {
         phone: "+212 XXX XXX XXX",
         email: "contact@mmdesign.ma",
       },
+      sendMessage: "Send us a message",
+      contactInfo: "Contact Information",
+      addressLabel: "Address",
+      phoneLabel: "Phone",
+      viaWhatsapp: "via WhatsApp",
+      locationTitle: "Our Location",
     },
     footer: {
       description: "M.M Design d'intérieur - Creators of exceptional spaces in Morocco",
@@ -584,9 +795,122 @@ export const translations: Record<Language, Translations> = {
       contact: "Contact",
       rights: "All rights reserved",
     },
+    whyChooseUs: {
+      title: "Why Choose Us",
+      subtitle: "Excellence at the Service of Your Project",
+      items: [
+        {
+          title: "Recognized Expertise",
+          description: "Over 10 years of experience in luxury interior design in Morocco, combining traditional craftsmanship and modern trends.",
+        },
+        {
+          title: "Complete Management",
+          description: "From design to execution, we manage every step of your project for total peace of mind.",
+        },
+        {
+          title: "Custom Design",
+          description: "Each project is unique. We create spaces that reflect your personality and lifestyle.",
+        },
+      ],
+    },
+    common: {
+      menu: "Menu",
+      language: "Language",
+    },
     whatsapp: {
       message: "Hello, I would like to discuss my interior design project.",
+      cta: "Free WhatsApp Consultation",
+      ariaLabel: "Contact us on WhatsApp",
     },
+    projects: [
+      {
+        id: 1,
+        title: "Modern Villa Casablanca",
+        category: "villa",
+        image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
+        problem: "Dark and poorly arranged space not benefiting from natural light.",
+        solution: "Opening spaces, installing bay windows and luminous minimalist design.",
+        clientQuote: "An incredible transformation that changed our way of living.",
+        gallery: [
+          "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1616137466218-f487bc3e4149?w=1600&h=1200&fit=crop",
+        ],
+      },
+      {
+        id: 2,
+        title: "Luxury Apartment Rabat",
+        category: "apartment",
+        image: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        problem: "Lack of storage and dated decoration.",
+        solution: "Integrated custom carpentry and sophisticated color palette.",
+        gallery: [
+          "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1600&h=1200&fit=crop",
+        ],
+      },
+      {
+        id: 3,
+        title: "Executive Office Marrakech",
+        category: "office",
+        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+        problem: "Noisy open space with no privacy.",
+        solution: "Creation of acoustic zones and glass meeting rooms.",
+        clientQuote: "Our employees love coming to work here now.",
+        gallery: [
+          "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1504384308090-c54be3855833?w=1600&h=1200&fit=crop",
+        ],
+      },
+      {
+        id: 4,
+        title: "Restaurant Marrakech",
+        category: "restaurant",
+        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
+        problem: "Cold and impersonal atmosphere.",
+        solution: "Use of warm materials, subdued lighting and local craftsmanship.",
+        gallery: [
+          "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1600&h=1200&fit=crop",
+        ],
+      },
+      {
+        id: 5,
+        title: "Traditional Villa Tangier",
+        category: "villa",
+        image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
+        problem: "Need for modernization while keeping the traditional soul.",
+        solution: "Fusion of traditional zellige style with clean contemporary lines.",
+        gallery: [
+          "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1600&h=1200&fit=crop",
+        ],
+      },
+      {
+        id: 6,
+        title: "Design Studio Casablanca",
+        category: "apartment",
+        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+        problem: "Small space difficult to arrange.",
+        solution: "Modular furniture and mirrors to visually enlarge the space.",
+        gallery: [
+          "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1600&h=1200&fit=crop",
+        ],
+      },
+    ],
   },
   ar: {
     nav: {
@@ -635,6 +959,20 @@ export const translations: Record<Language, Translations> = {
       expertise: {
         title: "خبرتنا",
         content: "متخصصون في التصميم الداخلي في المغرب، نتقن دقائق العمارة المحلية وتوقعات العملاء المتطلبين. من الدار البيضاء إلى مراكش، مروراً بالرباط وطنجة، نعمل في جميع مدن المغرب لإنشاء مساحات سكنية وتجارية استثنائية.",
+      },
+      values: {
+        excellence: {
+          title: "التميز",
+          description: "نسعى للتميز في كل تفاصيل إنجازاتنا.",
+        },
+        creativity: {
+          title: "الإبداع",
+          description: "كل مشروع فريد، مصمم خصيصًا وفقًا لرؤيتك.",
+        },
+        trust: {
+          title: "الثقة",
+          description: "رضاك وثقتك هما في صميم نهجنا.",
+        },
       },
     },
     services: {
@@ -706,6 +1044,10 @@ export const translations: Record<Language, Translations> = {
       restaurant: "المطاعم",
       subtitle: "اكتشف إنجازاتنا الاستثنائية",
       viewProject: "شاهد المشروع →",
+      problem: "التحدي",
+      solution: "الحل",
+      before: "قبل",
+      after: "بعد",
       beforeAfter: {
         title: "قبل / بعد",
         subtitle: "اكتشف تحول مشاريعنا",
@@ -799,6 +1141,12 @@ export const translations: Record<Language, Translations> = {
         phone: "+212 XXX XXX XXX",
         email: "contact@mmdesign.ma",
       },
+      sendMessage: "أرسل لنا رسالة",
+      contactInfo: "معلومات الاتصال",
+      addressLabel: "العنوان",
+      phoneLabel: "الهاتف",
+      viaWhatsapp: "عبر واتساب",
+      locationTitle: "موقعنا",
     },
     footer: {
       description: "M.M Design d'intérieur - مبتكرو المساحات الاستثنائية في المغرب",
@@ -808,6 +1156,119 @@ export const translations: Record<Language, Translations> = {
     },
     whatsapp: {
       message: "مرحبا، أود مناقشة مشروع التصميم الداخلي الخاص بي.",
+      cta: "استشارة مجانية عبر واتساب",
+      ariaLabel: "تواصل معنا عبر واتساب",
     },
+    whyChooseUs: {
+      title: "لماذا تختارنا",
+      subtitle: "التميز في خدمة مشروعك",
+      items: [
+        {
+          title: "خبرة معترف بها",
+          description: "أكثر من 10 سنوات من الخبرة في التصميم الداخلي الفاخر في المغرب، نجمع بين الحرفية التقليدية والاتجاهات الحديثة.",
+        },
+        {
+          title: "إدارة كاملة",
+          description: "من التصميم إلى التنفيذ، ندير كل خطوة في مشروعك لراحة بال تامة.",
+        },
+        {
+          title: "تصميم مخصص",
+          description: "كل مشروع فريد. نخلق مساحات تعكس شخصيتك وأسلوب حياتك.",
+        },
+      ],
+    },
+    common: {
+      menu: "القائمة",
+      language: "اللغة",
+    },
+    projects: [
+      {
+        id: 1,
+        title: "فيلا عصرية - الدار البيضاء",
+        category: "villa",
+        image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
+        problem: "مساحة مظلمة وسيئة الترتيب لا تستفيد من الضوء الطبيعي.",
+        solution: "فتح المساحات، تركيب نوافذ كبيرة وتصميم بسيط ومضيء.",
+        clientQuote: "تحول لا يصدق غير طريقة عيشنا.",
+        gallery: [
+          "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1616137466218-f487bc3e4149?w=1600&h=1200&fit=crop",
+        ],
+      },
+      {
+        id: 2,
+        title: "شقة فاخرة - الرباط",
+        category: "apartment",
+        image: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        problem: "نقص في التخزين وديكور قديم.",
+        solution: "نجارة مخصصة مدمجة ولوحة ألوان متطورة.",
+        gallery: [
+          "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1600&h=1200&fit=crop",
+        ],
+      },
+      {
+        id: 3,
+        title: "مكتب تنفيذي - مراكش",
+        category: "office",
+        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+        problem: "مساحة مفتوحة صاخبة وبدون خصوصية.",
+        solution: "إنشاء مناطق صوتية وقاعات اجتماعات زجاجية.",
+        clientQuote: "موظفونا يحبون المجيء للعمل هنا الآن.",
+        gallery: [
+          "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1504384308090-c54be3855833?w=1600&h=1200&fit=crop",
+        ],
+      },
+      {
+        id: 4,
+        title: "مطعم - مراكش",
+        category: "restaurant",
+        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
+        problem: "جو بارد وغير شخصي.",
+        solution: "استخدام مواد دافئة، إضاءة خافتة وحرفية محلية.",
+        gallery: [
+          "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1600&h=1200&fit=crop",
+        ],
+      },
+      {
+        id: 5,
+        title: "فيلا تقليدية - طنجة",
+        category: "villa",
+        image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
+        problem: "حاجة للتحديث مع الحفاظ على الروح التقليدية.",
+        solution: "دمج نمط الزليج التقليدي مع خطوط معاصرة نظيفة.",
+        gallery: [
+          "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1600&h=1200&fit=crop",
+        ],
+      },
+      {
+        id: 6,
+        title: "استوديو تصميم - الدار البيضاء",
+        category: "apartment",
+        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+        problem: "مساحة صغيرة صعبة الترتيب.",
+        solution: "أثاث معياري ومرايا لتكبير المساحة بصرياً.",
+        gallery: [
+          "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1600&h=1200&fit=crop",
+        ],
+      },
+    ],
   },
 };
