@@ -92,6 +92,7 @@ export default function PortfolioPage() {
             alt="Portfolio"
             fill
             className="object-cover"
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-primary/80" />
         </div>
@@ -129,7 +130,7 @@ export default function PortfolioPage() {
       {/* Projects Grid */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredProjects.map((project) => (
               <div
                 key={project.id}
@@ -141,6 +142,7 @@ export default function PortfolioPage() {
                     alt={project.title}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-0 left-0 right-0 p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -154,6 +156,7 @@ export default function PortfolioPage() {
                   <h3 className="text-xl font-heading font-bold text-primary mb-2 group-hover:text-accent transition-colors">
                     {project.title}
                   </h3>
+                  <p className="text-secondary-gray text-sm leading-relaxed mb-3">{project.description}</p>
                   <Link
                     href="#"
                     className="text-accent font-medium hover:text-accent-orange transition-colors text-sm"

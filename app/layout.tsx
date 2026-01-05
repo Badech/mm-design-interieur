@@ -39,7 +39,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
         <LanguageProvider>
           <Header />
-          <main className="min-h-screen">
+          <main className="min-h-screen pt-24 text-base md:text-lg leading-relaxed overflow-x-hidden">
             {children}
           </main>
           <Footer />

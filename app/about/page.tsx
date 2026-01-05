@@ -16,6 +16,7 @@ export default function AboutPage() {
             alt="About Us"
             fill
             className="object-cover"
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-primary/80" />
         </div>
@@ -45,6 +46,7 @@ export default function AboutPage() {
                   alt="Our Story"
                   fill
                   className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
             </div>
@@ -63,6 +65,7 @@ export default function AboutPage() {
                   alt="Our Vision"
                   fill
                   className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
               <div className="order-1 lg:order-2">

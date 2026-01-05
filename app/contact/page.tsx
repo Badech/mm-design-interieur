@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
+import { buildWhatsAppMessage, getWhatsAppUrl } from "@/lib/config";
 
 export default function ContactPage() {
   const { t } = useLanguage();
@@ -18,10 +19,8 @@ export default function ContactPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Replace with actual WhatsApp number
-    const whatsappNumber = "212XXXXXXXXX";
     const message = `Bonjour, je m'appelle ${formData.name}.\n\nEmail: ${formData.email}\nTéléphone: ${formData.phone}\n\nMessage: ${formData.message}`;
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = getWhatsAppUrl(buildWhatsAppMessage(message, { page: "Contact", language: "fr" }));
 
     // Redirect to WhatsApp
     window.open(whatsappUrl, "_blank");
@@ -65,8 +64,24 @@ export default function ContactPage() {
         </div>
       </section>
 
+      {/* WhatsApp Primary CTA */}
+      <section className="py-12 bg-[#f0fff5]">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <a
+            href={getWhatsAppUrl(buildWhatsAppMessage(t.whatsapp.message, { page: "Contact", language: "fr" }))}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-3 bg-[#25D366] text-white px-6 py-4 rounded-xl shadow-lg hover:bg-[#20BA5A] transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-[#25D366]/40"
+            aria-label="Contactez-nous sur WhatsApp"
+          >
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.052 3.134 4.974 4.384.695.3 1.237.48 1.66.614.697.222 1.333.191 1.836.116.56-.083 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z"/></svg>
+            <span className="font-semibold">{t.home.hero.cta1} via WhatsApp</span>
+          </a>
+        </div>
+      </section>
+
       {/* Contact Section */}
-      <section className="py-20 bg-white">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}

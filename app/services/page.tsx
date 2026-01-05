@@ -60,6 +60,7 @@ export default function ServicesPage() {
             alt="Our Services"
             fill
             className="object-cover"
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-primary/80" />
         </div>
@@ -95,6 +96,7 @@ export default function ServicesPage() {
                     alt={service.title}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 </div>
                 <div className={index % 2 === 1 ? "lg:col-start-1 lg:row-start-1" : ""}>

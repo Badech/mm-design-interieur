@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { buildWhatsAppMessage, getWhatsAppUrl } from "@/lib/config";
 
 export default function HomePage() {
   const { t } = useLanguage();
@@ -67,7 +68,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center pt-20">
+      <section className="relative min-h-[70vh] md:min-h-screen flex items-center justify-center pt-20">
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920&h=1080&fit=crop"
@@ -75,6 +76,7 @@ export default function HomePage() {
             fill
             className="object-cover"
             priority
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-primary/80" />
         </div>
@@ -89,16 +91,19 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
-              className="bg-accent text-primary px-8 py-4 rounded-lg font-semibold hover:bg-accent-light transition-all duration-300 hover:scale-105 shadow-lg"
+              className="bg-accent text-primary px-8 py-4 rounded-lg font-semibold hover:bg-accent-light transition-all duration-300 hover:scale-105 shadow-lg focus:outline-none focus:ring-4 focus:ring-accent/30"
             >
               {t.home.hero.cta1}
             </Link>
-            <Link
-              href="/portfolio"
-              className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/10 transition-all duration-300"
+            <a
+              href={getWhatsAppUrl(buildWhatsAppMessage(t.whatsapp.message, { page: "Home", language: "fr" }))}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#25D366] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#20BA5A] transition-all duration-300 hover:scale-105 shadow-lg focus:outline-none focus:ring-4 focus:ring-[#25D366]/40"
+              aria-label="Contactez-nous sur WhatsApp"
             >
-              {t.home.hero.cta2}
-            </Link>
+              Consultation gratuite WhatsApp
+            </a>
           </div>
         </div>
       </section>
@@ -134,7 +139,7 @@ export default function HomePage() {
               <Link
                 key={index}
                 href={service.link}
-                className="group bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-secondary"
+                className="group bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-secondary focus:outline-none focus:ring-4 focus:ring-accent/30"
               >
                 <div className="text-5xl mb-4">{service.icon}</div>
                 <h3 className="text-xl font-heading font-bold text-primary mb-3 group-hover:text-accent transition-colors">
@@ -143,8 +148,15 @@ export default function HomePage() {
                 <p className="text-secondary-gray text-sm leading-relaxed">
                   {service.description}
                 </p>
+                <span className="mt-4 inline-block text-accent font-semibold">{t.home.projects.viewAll.replace(/→.*/, '')} →</span>
               </Link>
             ))}
+          </div>
+
+          <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/contact" className="bg-accent text-primary px-6 py-3 rounded-lg font-semibold hover:bg-accent-light transition-all duration-300 hover:scale-105">
+              {t.home.hero.cta1}
+            </Link>
           </div>
         </div>
       </section>
@@ -179,6 +191,7 @@ export default function HomePage() {
                   alt={project.title}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -204,6 +217,11 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="md:col-span-2 mb-2 flex justify-center">
+              <Link href="/contact" className="inline-block bg-accent text-primary px-6 py-3 rounded-lg font-semibold hover:bg-accent-light transition-all duration-300 hover:scale-105">
+                {t.home.hero.cta1}
+              </Link>
+            </div>
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
@@ -232,7 +250,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-12 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/testimonials"
               className="inline-block text-accent font-semibold hover:text-accent-orange transition-colors"
