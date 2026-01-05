@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SocialLinks from "./SocialLinks";
 
 export default function Footer() {
   const { t, language } = useLanguage();
@@ -16,9 +17,15 @@ export default function Footer() {
           {/* About */}
           <div>
             <h3 className="text-xl font-heading font-bold mb-4">M.M Design d&apos;intérieur</h3>
-            <p className="text-secondary-gray text-sm leading-relaxed">
+            <p className="text-secondary-gray text-sm leading-relaxed mb-6">
               {t.footer.description}
             </p>
+            
+            {/* Social Media */}
+            <div>
+              <h4 className="text-sm font-semibold mb-3">{t.footer.followUs}</h4>
+              <SocialLinks variant="default" />
+            </div>
           </div>
 
           {/* Quick Links */}

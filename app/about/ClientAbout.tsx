@@ -2,9 +2,10 @@
 
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
+import SocialLinks from "@/components/SocialLinks";
 
 export default function ClientAbout() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <div className="pt-20">
@@ -115,6 +116,17 @@ export default function ClientAbout() {
               <p className="text-secondary-gray">
                 {t.about.values.trust.description}
               </p>
+            </div>
+          </div>
+          
+          {/* Social Media Section */}
+          <div className="mt-20 max-w-2xl mx-auto text-center">
+            <h3 className="text-2xl font-heading font-bold text-primary mb-4">{t.footer.followUs}</h3>
+            <p className="text-secondary-gray mb-6">
+              {language === 'fr' ? 'Rejoignez notre communauté et suivez nos dernières réalisations' : language === 'en' ? 'Join our community and follow our latest projects' : 'انضم إلى مجتمعنا وتابع أحدث مشاريعنا'}
+            </p>
+            <div className="flex justify-center">
+              <SocialLinks variant="large" />
             </div>
           </div>
         </div>

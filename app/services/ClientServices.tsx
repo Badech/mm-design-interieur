@@ -21,7 +21,7 @@ export default function ClientServices() {
       icon: "🏢",
       title: t.services.apartment.title,
       description: t.services.apartment.description,
-      image: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=600&fit=crop",
       features: t.services.features.apartment,
     },
     {

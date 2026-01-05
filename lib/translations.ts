@@ -173,6 +173,15 @@ export interface Translations {
     links: string;
     contact: string;
     rights: string;
+    followUs: string;
+  };
+  social: {
+    facebook: string;
+    instagram: string;
+    linkedin: string;
+    twitter: string;
+    youtube: string;
+    whatsapp: string;
   };
   whyChooseUs: {
     title: string;
@@ -436,7 +445,7 @@ export const translations: Record<Language, Translations> = {
         title: "Modern Villa Casablanca",
         category: "villa",
         image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
-        beforeImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=600&fit=crop",
         afterImage: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
         problem: "Dark and poorly arranged space not benefiting from natural light.",
         solution: "Opening spaces, installing bay windows and luminous minimalist design.",
@@ -451,13 +460,13 @@ export const translations: Record<Language, Translations> = {
         id: 2,
         title: "Luxury Apartment Rabat",
         category: "apartment",
-        image: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=600&fit=crop",
         beforeImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
-        afterImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=600&fit=crop",
         problem: "Lack of storage and dated decoration.",
         solution: "Integrated custom carpentry and sophisticated color palette.",
         gallery: [
-          "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1600&h=1200&fit=crop",
           "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1600&h=1200&fit=crop",
         ],
       },
@@ -509,7 +518,7 @@ export const translations: Record<Language, Translations> = {
         title: "Design Studio Casablanca",
         category: "apartment",
         image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
-        beforeImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=600&fit=crop",
         afterImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
         problem: "Small space difficult to arrange.",
         solution: "Modular furniture and mirrors to visually enlarge the space.",
@@ -524,6 +533,15 @@ export const translations: Record<Language, Translations> = {
       links: "Liens rapides",
       contact: "Contact",
       rights: "Tous droits réservés",
+      followUs: "Suivez-nous",
+    },
+    social: {
+      facebook: "Facebook",
+      instagram: "Instagram",
+      linkedin: "LinkedIn",
+      twitter: "Twitter",
+      youtube: "YouTube",
+      whatsapp: "WhatsApp",
     },
     whyChooseUs: {
       title: "Pourquoi Nous Choisir",
@@ -794,6 +812,15 @@ export const translations: Record<Language, Translations> = {
       links: "Quick Links",
       contact: "Contact",
       rights: "All rights reserved",
+      followUs: "Follow Us",
+    },
+    social: {
+      facebook: "Facebook",
+      instagram: "Instagram",
+      linkedin: "LinkedIn",
+      twitter: "Twitter",
+      youtube: "YouTube",
+      whatsapp: "WhatsApp",
     },
     whyChooseUs: {
       title: "Why Choose Us",
@@ -828,7 +855,7 @@ export const translations: Record<Language, Translations> = {
         title: "Modern Villa Casablanca",
         category: "villa",
         image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
-        beforeImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=600&fit=crop",
         afterImage: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
         problem: "Dark and poorly arranged space not benefiting from natural light.",
         solution: "Opening spaces, installing bay windows and luminous minimalist design.",
@@ -843,13 +870,13 @@ export const translations: Record<Language, Translations> = {
         id: 2,
         title: "Luxury Apartment Rabat",
         category: "apartment",
-        image: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=600&fit=crop",
         beforeImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
-        afterImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=600&fit=crop",
         problem: "Lack of storage and dated decoration.",
         solution: "Integrated custom carpentry and sophisticated color palette.",
         gallery: [
-          "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1600&h=1200&fit=crop",
           "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1600&h=1200&fit=crop",
         ],
       },
@@ -901,7 +928,7 @@ export const translations: Record<Language, Translations> = {
         title: "Design Studio Casablanca",
         category: "apartment",
         image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
-        beforeImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=600&fit=crop",
         afterImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
         problem: "Small space difficult to arrange.",
         solution: "Modular furniture and mirrors to visually enlarge the space.",
@@ -1153,6 +1180,15 @@ export const translations: Record<Language, Translations> = {
       links: "روابط سريعة",
       contact: "اتصل",
       rights: "جميع الحقوق محفوظة",
+      followUs: "تابعنا",
+    },
+    social: {
+      facebook: "فيسبوك",
+      instagram: "إنستغرام",
+      linkedin: "لينكد إن",
+      twitter: "تويتر",
+      youtube: "يوتيوب",
+      whatsapp: "واتساب",
     },
     whatsapp: {
       message: "مرحبا، أود مناقشة مشروع التصميم الداخلي الخاص بي.",
@@ -1187,7 +1223,7 @@ export const translations: Record<Language, Translations> = {
         title: "فيلا عصرية - الدار البيضاء",
         category: "villa",
         image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
-        beforeImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=600&fit=crop",
         afterImage: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&h=600&fit=crop",
         problem: "مساحة مظلمة وسيئة الترتيب لا تستفيد من الضوء الطبيعي.",
         solution: "فتح المساحات، تركيب نوافذ كبيرة وتصميم بسيط ومضيء.",
@@ -1202,13 +1238,13 @@ export const translations: Record<Language, Translations> = {
         id: 2,
         title: "شقة فاخرة - الرباط",
         category: "apartment",
-        image: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=600&fit=crop",
         beforeImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
-        afterImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=600&fit=crop",
         problem: "نقص في التخزين وديكور قديم.",
         solution: "نجارة مخصصة مدمجة ولوحة ألوان متطورة.",
         gallery: [
-          "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=1600&h=1200&fit=crop",
+          "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1600&h=1200&fit=crop",
           "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1600&h=1200&fit=crop",
         ],
       },
@@ -1260,7 +1296,7 @@ export const translations: Record<Language, Translations> = {
         title: "استوديو تصميم - الدار البيضاء",
         category: "apartment",
         image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
-        beforeImage: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+        beforeImage: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=600&fit=crop",
         afterImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
         problem: "مساحة صغيرة صعبة الترتيب.",
         solution: "أثاث معياري ومرايا لتكبير المساحة بصرياً.",
