@@ -214,9 +214,9 @@ export const translations: Record<Language, Translations> = {
     },
     home: {
       hero: {
-        title: "Créons Ensemble des Espaces d'Exception",
-        subtitle: "Design d'intérieur luxe et moderne au Maroc",
-        cta1: "Contactez-nous",
+        title: "Transformez Votre Espace en Œuvre d'Art",
+        subtitle: "Design d'intérieur haut de gamme au Maroc • Expertise reconnue • Résultats exceptionnels",
+        cta1: "Consultation gratuite",
         cta2: "Voir nos projets",
       },
       intro: {
@@ -582,9 +582,9 @@ export const translations: Record<Language, Translations> = {
     },
     home: {
       hero: {
-        title: "Let's Create Exceptional Spaces Together",
-        subtitle: "Luxury and modern interior design in Morocco",
-        cta1: "Contact Us",
+        title: "Transform Your Space Into a Work of Art",
+        subtitle: "Premium interior design in Morocco • Recognized expertise • Exceptional results",
+        cta1: "Free consultation",
         cta2: "View Our Projects",
       },
       intro: {
@@ -950,9 +950,9 @@ export const translations: Record<Language, Translations> = {
     },
     home: {
       hero: {
-        title: "لننشئ مساحات استثنائية معاً",
-        subtitle: "تصميم داخلي فاخر وحديث في المغرب",
-        cta1: "اتصل بنا",
+        title: "حوّل مساحتك إلى تحفة فنية",
+        subtitle: "تصميم داخلي راقي في المغرب • خبرة معترف بها • نتائج استثنائية",
+        cta1: "استشارة مجانية",
         cta2: "شاهد مشاريعنا",
       },
       intro: {

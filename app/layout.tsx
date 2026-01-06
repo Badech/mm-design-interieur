@@ -90,10 +90,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${playfair.variable} font-sans`}>
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
         <LanguageProvider>
           <Header />
-          <main className="min-h-screen pt-24 text-[17px] md:text-lg leading-relaxed md:leading-loose overflow-x-hidden">
+          <main className="min-h-screen pt-20 sm:pt-24 text-base sm:text-lg leading-relaxed overflow-x-hidden">
             {children}
           </main>
           <Footer />

@@ -11,6 +11,8 @@ import "swiper/css/navigation";
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import "photoswipe/style.css";
 import Link from "next/link";
+import CallToAction from "@/components/CallToAction";
+import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 
 type ProjectCategory = "all" | "villa" | "apartment" | "office" | "restaurant";
 
@@ -18,6 +20,7 @@ export default function ClientPortfolio() {
   const { t, language } = useLanguage();
   const isRTL = language === "ar";
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>("all");
+  const [expandedProject, setExpandedProject] = useState<number | null>(null);
 
   // Init PhotoSwipe lightbox for galleries
   useEffect(() => {
@@ -92,126 +95,138 @@ export default function ClientPortfolio() {
       <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div id="portfolio-galleries" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {filteredProjects.map((project) => (
-              <div
-                key={project.id}
-                className="group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col h-full"
-              >
-                <div className="relative h-72 sm:h-64 overflow-hidden flex-shrink-0">
-                  {/* Mobile: swipeable gallery with pagination */}
-                  <div className="block lg:hidden h-full">
-                    <Swiper
-                      spaceBetween={0}
-                      slidesPerView={1}
-                      pagination={{ clickable: true }}
-                      modules={[Pagination]}
-                      className="h-full w-full"
+            {filteredProjects.map((project) => {
+              // Extract city from title (last word)
+              const titleParts = project.title.split(' ');
+              const city = titleParts[titleParts.length - 1];
+              
+              return (
+                <div
+                  key={project.id}
+                  className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col h-full"
+                >
+                  {/* Project Image with Overlay Captions */}
+                  <div className="relative h-72 sm:h-64 lg:h-80 overflow-hidden flex-shrink-0">
+                    {/* Main Image */}
+                    <a
+                      href={project.gallery[0]}
+                      data-pswp-src={project.gallery[0]}
+                      data-pswp-width="1600"
+                      data-pswp-height="1200"
+                      className="block h-full w-full relative"
+                      aria-label={project.title}
                     >
-                      {project.gallery.map((src, idx) => (
-                        <SwiperSlide key={idx}>
-                          <a
-                            href={src}
-                            data-pswp-src={src}
-                            data-pswp-width="1600"
-                            data-pswp-height="1200"
-                            aria-label={`${project.title} - image ${idx + 1}`}
-                            className="block h-full w-full relative"
-                          >
-                            <Image
-                              src={src}
-                              alt={`${project.title} ${idx + 1}`}
-                              fill
-                              className="object-cover"
-                              sizes="100vw"
-                            />
-                          </a>
-                        </SwiperSlide>
-                      ))}
-                    </Swiper>
-                  </div>
-                  
-                  {/* Desktop: single image with lightbox trigger */}
-                  <a
-                    href={project.gallery[0]}
-                    data-pswp-src={project.gallery[0]}
-                    data-pswp-width="1600"
-                    data-pswp-height="1200"
-                    className="hidden lg:block h-full w-full relative"
-                    aria-label={project.title}
-                  >
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-                  </a>
-
-                  {/* Hidden gallery items for lightbox navigation (Desktop only) */}
-                  <div className="hidden">
-                    {project.gallery.slice(1).map((src, idx) => (
-                      <a
-                        key={idx}
-                        href={src}
-                        data-pswp-src={src}
-                        data-pswp-width="1600"
-                        data-pswp-height="1200"
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        loading="lazy"
+                        quality={85}
                       />
-                    ))}
-                  </div>
-                </div>
+                      
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                    </a>
 
-                <div className="p-6 flex flex-col flex-1">
-                  <div className="mb-4">
-                    <span className="text-accent text-xs font-bold uppercase tracking-wider mb-2 block">
-                      {filters.find((f) => f.key === project.category)?.label}
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-heading font-bold text-primary group-hover:text-accent transition-colors">
-                      {project.title}
-                    </h3>
-                  </div>
+                    {/* Category Badge */}
+                    <div className="absolute top-4 left-4 bg-accent/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+                      <span className="text-xs font-bold text-primary uppercase tracking-wider">
+                        {filters.find((f) => f.key === project.category)?.label}
+                      </span>
+                    </div>
 
-                  <div className="space-y-4 mb-6 flex-1">
-                    <div>
-                      <h4 className="text-sm font-bold text-primary mb-1">{t.portfolio.problem}</h4>
-                      <p className="text-secondary-gray text-sm leading-relaxed">{project.problem}</p>
+                    {/* City Badge */}
+                    <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+                      <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-sm font-semibold text-primary">{city}</span>
                     </div>
-                    <div>
-                      <h4 className="text-sm font-bold text-primary mb-1">{t.portfolio.solution}</h4>
-                      <p className="text-secondary-gray text-sm leading-relaxed">{project.solution}</p>
-                    </div>
-                    {project.clientQuote && (
-                      <div className={`bg-secondary/50 p-3 rounded-lg ${isRTL ? 'border-r-2' : 'border-l-2'} border-accent mt-3`}>
-                        <p className="text-xs italic text-primary/80">&quot;{project.clientQuote}&quot;</p>
+
+                    {/* Gallery Count Badge */}
+                    {project.gallery.length > 1 && (
+                      <div className="absolute bottom-4 right-4 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                        <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <span className="text-xs font-semibold text-white">{project.gallery.length}</span>
                       </div>
                     )}
+
+                    {/* Hidden gallery items for lightbox */}
+                    <div className="hidden">
+                      {project.gallery.slice(1).map((src, idx) => (
+                        <a
+                          key={idx}
+                          href={src}
+                          data-pswp-src={src}
+                          data-pswp-width="1600"
+                          data-pswp-height="1200"
+                        />
+                      ))}
+                    </div>
                   </div>
 
-                  <div className="pt-4 border-t border-gray-100">
-                    <button className="text-primary font-bold hover:text-accent transition-colors text-sm flex items-center gap-2 group/btn">
+                  {/* Project Info - Cleaner Design */}
+                  <div className="p-5 lg:p-6 flex flex-col flex-1">
+                    {/* Title */}
+                    <h3 className="text-lg lg:text-xl font-heading font-bold text-primary mb-3 group-hover:text-accent transition-colors line-clamp-2">
+                      {project.title}
+                    </h3>
+                    
+                    {/* One-line Description */}
+                    <p className="text-sm text-secondary-gray mb-4 leading-relaxed line-clamp-2 flex-1">
+                      {project.solution}
+                    </p>
+
+                    {/* Before/After Button - Only if images exist */}
+                    {project.beforeImage && project.afterImage && (
+                      <button
+                        onClick={() => setExpandedProject(expandedProject === project.id ? null : project.id)}
+                        className="text-primary font-semibold hover:text-accent transition-colors text-sm flex items-center gap-2 mb-3"
+                      >
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        {expandedProject === project.id 
+                          ? (language === 'fr' ? 'Masquer Avant/Après' : language === 'en' ? 'Hide Before/After' : 'إخفاء قبل/بعد')
+                          : t.portfolio.beforeAfter.title
+                        }
+                      </button>
+                    )}
+
+                    {/* View Project Link */}
+                    <button className="text-accent font-bold hover:text-accent/80 transition-colors text-sm flex items-center gap-2 group/btn mt-auto pt-4 border-t border-gray-100">
                       {t.portfolio.viewProject}
                       <span className={`transition-transform ${isRTL ? 'group-hover/btn:-translate-x-1' : 'group-hover/btn:translate-x-1'}`}>
                         {isRTL ? '←' : '→'}
                       </span>
                     </button>
                   </div>
+
+                  {/* Expandable Before/After Slider */}
+                  {expandedProject === project.id && project.beforeImage && project.afterImage && (
+                    <div className="px-5 lg:px-6 pb-6 animate-fade-in">
+                      <div className="pt-4 border-t border-gray-100">
+                        <BeforeAfterSlider
+                          beforeImage={project.beforeImage}
+                          afterImage={project.afterImage}
+                          alt={project.title}
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-heading font-bold mb-6">{t.services.cta.title}</h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">{t.services.cta.subtitle}</p>
-          <Link href="/contact" className="inline-block bg-accent text-primary px-8 py-4 rounded-lg font-semibold hover:bg-accent-light transition-all duration-300 hover:scale-105">{t.home.hero.cta1}</Link>
-        </div>
-      </section>
+      <CallToAction variant="portfolio" />
     </div>
   );
 }
