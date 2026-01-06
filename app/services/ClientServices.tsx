@@ -3,6 +3,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import Link from "next/link";
 import Image from "next/image";
+import CallToAction from "@/components/CallToAction";
 
 export default function ClientServices() {
   const { t } = useLanguage();
@@ -21,7 +22,7 @@ export default function ClientServices() {
       icon: "🏢",
       title: t.services.apartment.title,
       description: t.services.apartment.description,
-      image: "https://images.unsplash.com/photo-1631889993954-2d01d442f712?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=600&fit=crop",
       features: t.services.features.apartment,
     },
     {
@@ -139,22 +140,7 @@ export default function ClientServices() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 md:py-20 bg-primary text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-heading font-bold mb-6">
-            {t.services.cta.title}
-          </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            {t.services.cta.subtitle}
-          </p>
-          <Link
-            href="/contact"
-            className="inline-block bg-accent text-primary px-8 py-4 rounded-lg font-semibold hover:bg-accent-light transition-all duration-300 hover:scale-105"
-          >
-            {t.home.hero.cta1}
-          </Link>
-        </div>
-      </section>
+      <CallToAction variant="services" />
     </div>
   );
 }

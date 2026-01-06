@@ -2,9 +2,11 @@
 
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
+import SocialLinks from "@/components/SocialLinks";
+import CallToAction from "@/components/CallToAction";
 
 export default function ClientAbout() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <div className="pt-20">
@@ -117,8 +119,12 @@ export default function ClientAbout() {
               </p>
             </div>
           </div>
+          
         </div>
       </section>
+
+      {/* CTA Section */}
+      <CallToAction variant="footer" />
     </div>
   );
 }
